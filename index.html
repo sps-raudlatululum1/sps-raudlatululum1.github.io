@@ -1258,29 +1258,6 @@ nav.links a.active{background:var(--green);color:#fff}
   lb.addEventListener('click',function(e){ if(e.target===lb) closeLb(); });
   document.addEventListener('keydown',function(e){ if(e.key==='Escape') closeLb(); });
 
-  // Salin teks helper
-  function copyText(text,btn){
-    function done(){ var old=btn.textContent; btn.textContent='Tersalin ✓'; setTimeout(function(){btn.textContent=old;},1800); }
-    if(navigator.clipboard&&navigator.clipboard.writeText){ navigator.clipboard.writeText(text).then(done).catch(function(){ fallback(); }); } else fallback();
-    function fallback(){ var ta=document.createElement('textarea'); ta.value=text; document.body.appendChild(ta); ta.select(); try{document.execCommand('copy'); done();}catch(e){} document.body.removeChild(ta); }
-  }
-  function showOut(outId,text){
-    var out=document.getElementById(outId);
-    out.innerHTML='<strong>Ringkasan siap dikirim kepada panitia:</strong>';
-    var pre=document.createElement('pre'); pre.textContent=text; out.appendChild(pre);
-    var wa=document.createElement('a'); wa.className='btn btn-green btn-sm'; wa.textContent='Kirim via WhatsApp';
-    wa.href='https://wa.me/628816330807?text='+encodeURIComponent(text);
-    wa.target='_blank'; wa.rel='noopener'; wa.style.marginRight='8px';
-    out.appendChild(wa);
-    var btn=document.createElement('button'); btn.type='button'; btn.className='btn btn-green btn-sm'; btn.textContent='Salin Ringkasan';
-    btn.addEventListener('click',function(){ copyText(text,btn); });
-    out.appendChild(btn);
-    var note=document.createElement('p'); note.className='note'; note.style.margin='10px 0 0';
-    note.textContent='WhatsApp akan terbuka dengan ringkasan ini sudah terisi. Tekan kirim di WhatsApp untuk menyampaikannya kepada Ust. M. Khofi (+62 881-6330-807). Jika WhatsApp tidak terbuka, tekan tombol "Kirim via WhatsApp" di atas.';
-    out.appendChild(note);
-    out.classList.add('show'); out.scrollIntoView({behavior:'smooth',block:'nearest'});
-    window.open(wa.href,'_blank');
-  }
   function val(form,name){ var el=form.elements[name]; return el?el.value.trim():''; }
 
   // Formulir PPDB
@@ -1301,7 +1278,7 @@ nav.links a.active{background:var(--green);color:#fff}
     if(val(pf,'asal')) lines.push('Asal Daerah: '+val(pf,'asal'));
     if(val(pf,'pendidikan')) lines.push('Pendidikan Terakhir: '+val(pf,'pendidikan'));
     if(val(pf,'catatan')) lines.push('Catatan: '+val(pf,'catatan'));
-    showOut('ppdb-out',lines.join('\n'));
+    window.location.href='https://wa.me/628816330807?text='+encodeURIComponent(lines.join('\n'));
   });
 
   // Formulir kontak
@@ -1314,7 +1291,7 @@ nav.links a.active{background:var(--green);color:#fff}
       out.classList.add('show'); return;
     }
     var lines=['PESAN UNTUK SPS RAUDLATUL ULUM I PUTRA','Nama: '+val(cf,'nama'),'Keperluan: '+val(cf,'keperluan'),'','Pesan:',val(cf,'pesan')];
-    showOut('contact-out',lines.join('\n'));
+    window.location.href='https://wa.me/628816330807?text='+encodeURIComponent(lines.join('\n'));
   });
 
   // Peta lokasi
