@@ -945,7 +945,7 @@ nav.links a.active{background:var(--green);color:#fff}
 
       <div class="card reveal">
         <h3>Formulir Pendaftaran Daring</h3>
-        <p style="margin-top:0">Isi data awal calon santri di bawah ini. Setelah terkirim di layar, salin ringkasannya dan sampaikan kepada panitia saat menghubungi kami.</p>
+        <p style="margin-top:0">Isi data awal calon santri di bawah ini. Setelah tombol ditekan, WhatsApp akan terbuka dengan data pendaftaran sudah terisi — tinggal tekan kirim kepada Ust. M. Khofi.</p>
         <form class="f" id="ppdb-form" novalidate>
           <div class="frow">
             <label>Nama Calon Santri<input name="nama" required placeholder="Nama lengkap" /></label>
@@ -962,7 +962,7 @@ nav.links a.active{background:var(--green);color:#fff}
           </div>
           <label>Pendidikan Terakhir<input name="pendidikan" placeholder="Mis. MI/SD, MTs/SMP" /></label>
           <label>Catatan untuk Panitia<textarea name="catatan" rows="3" placeholder="Hal yang ingin ditanyakan atau disampaikan"></textarea></label>
-          <button class="btn btn-gold" type="submit" style="justify-content:center">Buat Ringkasan Pendaftaran</button>
+          <button class="btn btn-gold" type="submit" style="justify-content:center">Kirim Pendaftaran via WhatsApp</button>
           <div class="form-out" id="ppdb-out" role="status"></div>
         </form>
       </div>
@@ -1083,7 +1083,7 @@ nav.links a.active{background:var(--green);color:#fff}
 
       <div class="card reveal">
         <h3>Kirim Pesan</h3>
-        <p style="margin-top:0">Tulis pesan Anda; tombol di bawah akan menyusunnya menjadi teks siap salin untuk disampaikan kepada pengelola lembaga.</p>
+        <p style="margin-top:0">Tulis pesan Anda; tombol di bawah akan membuka WhatsApp dengan pesan Anda sudah terisi — tinggal tekan kirim kepada Ust. M. Khofi.</p>
         <form class="f" id="contact-form" novalidate>
           <div class="frow">
             <label>Nama<input name="nama" required placeholder="Nama Anda" /></label>
@@ -1096,7 +1096,7 @@ nav.links a.active{background:var(--green);color:#fff}
               </select></label>
           </div>
           <label>Isi Pesan<textarea name="pesan" rows="5" required placeholder="Tulis pesan Anda di sini"></textarea></label>
-          <button class="btn btn-green" type="submit" style="justify-content:center">Susun Pesan</button>
+          <button class="btn btn-green" type="submit" style="justify-content:center">Kirim Pesan via WhatsApp</button>
           <div class="form-out" id="contact-out" role="status"></div>
         </form>
       </div>
@@ -1266,15 +1266,20 @@ nav.links a.active{background:var(--green);color:#fff}
   }
   function showOut(outId,text){
     var out=document.getElementById(outId);
-    out.innerHTML='<strong>Ringkasan siap disampaikan kepada panitia:</strong>';
+    out.innerHTML='<strong>Ringkasan siap dikirim kepada panitia:</strong>';
     var pre=document.createElement('pre'); pre.textContent=text; out.appendChild(pre);
+    var wa=document.createElement('a'); wa.className='btn btn-green btn-sm'; wa.textContent='Kirim via WhatsApp';
+    wa.href='https://wa.me/628816330807?text='+encodeURIComponent(text);
+    wa.target='_blank'; wa.rel='noopener'; wa.style.marginRight='8px';
+    out.appendChild(wa);
     var btn=document.createElement('button'); btn.type='button'; btn.className='btn btn-green btn-sm'; btn.textContent='Salin Ringkasan';
     btn.addEventListener('click',function(){ copyText(text,btn); });
     out.appendChild(btn);
     var note=document.createElement('p'); note.className='note'; note.style.margin='10px 0 0';
-    note.textContent='Sampaikan ringkasan ini kepada panitia melalui WhatsApp resmi lembaga: +62 881-6330-807 (Ust. M. Khofi).';
+    note.textContent='WhatsApp akan terbuka dengan ringkasan ini sudah terisi. Tekan kirim di WhatsApp untuk menyampaikannya kepada Ust. M. Khofi (+62 881-6330-807). Jika WhatsApp tidak terbuka, tekan tombol "Kirim via WhatsApp" di atas.';
     out.appendChild(note);
     out.classList.add('show'); out.scrollIntoView({behavior:'smooth',block:'nearest'});
+    window.open(wa.href,'_blank');
   }
   function val(form,name){ var el=form.elements[name]; return el?el.value.trim():''; }
 
