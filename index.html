@@ -73,11 +73,13 @@ header.nav{position:sticky;top:0;z-index:60;background:color-mix(in srgb,var(--s
 nav.links{margin-left:auto;display:flex;gap:4px;align-items:center}
 nav.links a{padding:9px 13px;border-radius:10px;color:var(--ink-2);font-weight:500;font-size:.92rem}
 nav.links a:hover{background:var(--green-soft);color:var(--green)}
+.nav-cta{margin-left:8px}
 .burger{display:none;margin-left:auto;background:none;border:1px solid var(--line);border-radius:10px;padding:9px;cursor:pointer;color:var(--ink)}
 .burger svg{width:22px;height:22px;display:block}
 @media(max-width:960px){
   nav.links{display:none;position:absolute;left:0;right:0;top:100%;background:var(--surface);border-bottom:1px solid var(--line);flex-direction:column;align-items:stretch;padding:12px 20px 18px;box-shadow:var(--shadow)}
   nav.links.open{display:flex}
+  nav.links .btn{justify-content:center;margin-top:8px}
   .burger{display:block}
 }
 /* ---------- Hero ---------- */
@@ -384,9 +386,9 @@ nav.links a.active{background:var(--green);color:#fff}
     <a href="#program">Program</a>
     <a href="#berita">Berita</a>
     <a href="#galeri">Galeri</a>
-    <a href="#ppdb">PPDB</a>
     <a href="#kontak">Kontak</a>
     <a href="https://sista-ru1.netlify.app/" target="_blank" rel="noopener">Layanan</a>
+    <a class="btn btn-gold btn-sm nav-cta" href="#ppdb">Daftar Santri Baru</a>
   </nav>
 </div></header>
 
